@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "gestion_dette_cour/1.0.0": {
+        "runtime": {
+          "gestion_dette_cour.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "gestion_dette_cour/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
