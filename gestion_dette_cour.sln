@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gestion_dette_cour", "gestion_dette_cour\gestion_dette_cour.csproj", "{159DE75F-4DE2-4DE1-AF90-9F3AFC2E9D01}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gestion_dette_web", "..\gestion_dette_web\gestion_dette_web.csproj", "{4689A404-E63A-44D5-80B6-840492D1CACC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{159DE75F-4DE2-4DE1-AF90-9F3AFC2E9D01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{159DE75F-4DE2-4DE1-AF90-9F3AFC2E9D01}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{159DE75F-4DE2-4DE1-AF90-9F3AFC2E9D01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4689A404-E63A-44D5-80B6-840492D1CACC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4689A404-E63A-44D5-80B6-840492D1CACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4689A404-E63A-44D5-80B6-840492D1CACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4689A404-E63A-44D5-80B6-840492D1CACC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
