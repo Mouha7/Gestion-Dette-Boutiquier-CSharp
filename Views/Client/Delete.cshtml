@@ -1,0 +1,24 @@
+@model gestion_dette_web.Models.Client
+
+@{
+    ViewData["Title"] = "Supprimer un Client";
+}
+
+<div class="container mt-4">
+    <h1>Supprimer un Client</h1>
+    <p>Êtes-vous sûr de vouloir supprimer ce client ?</p>
+
+    <div>
+        <p><strong>Nom:</strong> @Model.Nom</p>
+        <p><strong>Prénom:</strong> @Model.Prenom</p>
+        <p><strong>Email:</strong> @Model.Email</p>
+        <p><strong>Téléphone:</strong> @Model.Telephone</p>
+        <p><strong>Adresse:</strong> @Model.Adresse</p>
+    </div>
+
+    <form asp-action="DeleteConfirmed" method="post">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Supprimer</button>
+        <a href="@Url.Action("Index")" class="btn btn-secondary">Annuler</a>
+    </form>
+</div>

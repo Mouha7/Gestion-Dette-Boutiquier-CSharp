@@ -1,0 +1,41 @@
+@model IEnumerable<gestion_dette_web.Models.Client>
+
+@{
+    ViewData["Title"] = "Clients";
+}
+
+<div class="container mt-4">
+    <h1>Liste des Clients</h1>
+    <a href="@Url.Action("Create")" class="btn btn-primary mb-3">Ajouter un client</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Email</th>
+                <th>Téléphone</th>
+                <th>Adresse</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var client in Model)
+            {
+                <tr>
+                    <td>@client.Id</td>
+                    <td>@client.Nom</td>
+                    <td>@client.Prenom</td>
+                    <td>@client.Email</td>
+                    <td>@client.Telephone</td>
+                    <td>@client.Adresse</td>
+                    <td>
+                        <a href="@Url.Action("Details", new { id = client.Id })" class="btn btn-info btn-sm">Détails</a>
+                        <a href="@Url.Action("Edit", new { id = client.Id })" class="btn btn-warning btn-sm">Modifier</a>
+                        <a href="@Url.Action("Delete", new { id = client.Id })" class="btn btn-danger btn-sm">Supprimer</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
