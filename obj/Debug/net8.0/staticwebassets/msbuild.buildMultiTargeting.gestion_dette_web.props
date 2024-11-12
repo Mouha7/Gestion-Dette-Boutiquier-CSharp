@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/gestion_dette_web.props" />
+</Project>
