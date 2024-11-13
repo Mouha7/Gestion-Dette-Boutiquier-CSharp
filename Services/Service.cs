@@ -2,9 +2,9 @@ using System.Data;
 using MySql.Data.MySqlClient;
 using Dapper;
 
-namespace gestion_dette_web.Repositories
+namespace gestion_dette_web.services
 {
-    public class Repository<T> : IRepository<T>
+    public class Service<T> : IService<T>
     {
         private string connectionString = "server=localhost;port=8889;database=gestion_dette_csharp_web;user=root;password=root";
         

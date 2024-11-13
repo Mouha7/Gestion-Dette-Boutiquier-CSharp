@@ -1,29 +1,31 @@
 using gestion_dette_web.Models;
-using gestion_dette_web.Repositories;
+using gestion_dette_web.services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace gestion_dette_web.Controllers
 {
     public class ClientController : Controller
     {
-        private readonly ClientRepository _clientRepository;
+        private readonly IClientService _clientService;
+        private readonly ILogger<ClientController> _logger;
 
-        public ClientController(IClientRepository clientRepository)
+        public ClientController(ILogger<ClientController> logger, IClientService clientService)
         {
-            _clientRepository = (ClientRepository)clientRepository;
+            _logger = logger;
+            _clientService = clientService;
         }
 
         // Index - Affiche tous les clients
         public IActionResult Index()
         {
-            var clients = _clientRepository.GetAll();
+            var clients = _clientService.GetAll();
             return View(clients);
         }
 
         // Details - Affiche les détails d'un client spécifique
         public IActionResult Details(int id)
         {
-            var client = _clientRepository.GetById(id);
+            var client = _clientService.GetById(id);
             if (client == null)
             {
                 return NotFound();
@@ -43,7 +45,7 @@ namespace gestion_dette_web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _clientRepository.Insert(client);
+                _clientService.Insert(client);
                 return RedirectToAction(nameof(Index));
             }
             return View(client);
@@ -52,7 +54,7 @@ namespace gestion_dette_web.Controllers
         // Edit - Formulaire d'édition d'un client
         public IActionResult Edit(int id)
         {
-            var client = _clientRepository.GetById(id);
+            var client = _clientService.GetById(id);
             if (client == null)
             {
                 return NotFound();
@@ -66,7 +68,7 @@ namespace gestion_dette_web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _clientRepository.Update(client);
+                _clientService.Update(client);
                 return RedirectToAction(nameof(Index));
             }
             return View(client);
@@ -75,7 +77,7 @@ namespace gestion_dette_web.Controllers
         // Delete - Confirmation de suppression d'un client
         public IActionResult Delete(int id)
         {
-            var client = _clientRepository.GetById(id);
+            var client = _clientService.GetById(id);
             if (client == null)
             {
                 return NotFound();
@@ -87,7 +89,7 @@ namespace gestion_dette_web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            _clientRepository.Delete(id);
+            _clientService.Delete(id);
             return RedirectToAction(nameof(Index));
         }
     }

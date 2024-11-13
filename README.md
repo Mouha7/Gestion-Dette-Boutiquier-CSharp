@@ -6,3 +6,6 @@ dotnet ef migrations add InitialCreate
 
 # Mettre à jour la base de données
 dotnet ef database update
+
+# Live Preview
+dotnet watch run

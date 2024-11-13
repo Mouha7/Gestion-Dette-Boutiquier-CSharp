@@ -2,14 +2,14 @@
 using Microsoft.EntityFrameworkCore;
 using gestion_dette_web.Data;
 
-namespace gestion_dette_web.Repositories
+namespace gestion_dette_web.services
 {
-    public class RepositoryEF<T> : IRepository<T> where T : class
+    public class ServiceEF<T> : IService<T> where T : class
     {
         protected readonly ApplicationDbContext _context;
         protected readonly DbSet<T> _dbSet;
 
-        public RepositoryEF(ApplicationDbContext context)
+        public ServiceEF(ApplicationDbContext context)
         {
             _context = context;
             _dbSet = context.Set<T>();

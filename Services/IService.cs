@@ -1,6 +1,6 @@
-namespace gestion_dette_web.Repositories
+namespace gestion_dette_web.services
 {
-    public interface IRepository<T>
+    public interface IService<T>
     {
         IEnumerable<T> GetAll();
         T? GetById(int id);

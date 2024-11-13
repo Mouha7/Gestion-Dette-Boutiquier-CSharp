@@ -5,20 +5,94 @@
 }
 
 <div class="container mt-4">
-    <h1>Supprimer un Client</h1>
-    <p>Êtes-vous sûr de vouloir supprimer ce client ?</p>
+    <div class="card border-danger">
+        <div class="card-header bg-danger text-white">
+            <h3 class="card-title mb-0"><i class="fas fa-exclamation-triangle me-2"></i>Confirmation de suppression</h3>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-warning">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                Attention : Cette action est irréversible. Êtes-vous sûr de vouloir supprimer ce client ?
+            </div>
 
-    <div>
-        <p><strong>Nom:</strong> @Model.Nom</p>
-        <p><strong>Prénom:</strong> @Model.Prenom</p>
-        <p><strong>Email:</strong> @Model.Email</p>
-        <p><strong>Téléphone:</strong> @Model.Telephone</p>
-        <p><strong>Adresse:</strong> @Model.Adresse</p>
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header bg-light">
+                            <h5 class="card-title mb-0">Informations du client</h5>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <th class="text-muted" style="width: 30%">Surnom:</th>
+                                        <td>@Model.Surnom</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-muted">Email:</th>
+                                        <td>@Model.Email</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-muted">Téléphone:</th>
+                                        <td>@Model.Telephone</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-muted">Adresse:</th>
+                                        <td>@Model.Adresse</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end gap-2">
+                <a href="@Url.Action("Index")" class="btn btn-secondary">
+                    <i class="fas fa-times me-2"></i>Annuler
+                </a>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">
+                    <i class="fas fa-trash-alt me-2"></i>Supprimer
+                </button>
+            </div>
+        </div>
     </div>
-
-    <form asp-action="DeleteConfirmed" method="post">
-        <input type="hidden" asp-for="Id" />
-        <button type="submit" class="btn btn-danger">Supprimer</button>
-        <a href="@Url.Action("Index")" class="btn btn-secondary">Annuler</a>
-    </form>
 </div>
+
+<!-- Modal de confirmation -->
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="deleteConfirmModalLabel">
+                    <i class="fas fa-exclamation-triangle me-2"></i>Confirmation finale
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="mb-0">Êtes-vous absolument sûr de vouloir supprimer le client <strong>@Model.Surnom: @Model.Email</strong> ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i>Annuler
+                </button>
+                <form asp-action="DeleteConfirmed" method="post" class="d-inline">
+                    <input type="hidden" asp-for="Id" />
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash-alt me-2"></i>Confirmer la suppression
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Optionnel : Activer tous les tooltips
+        $(function () {
+            $('[data-bs-toggle="tooltip"]').tooltip()
+        });
+    </script>
+}
