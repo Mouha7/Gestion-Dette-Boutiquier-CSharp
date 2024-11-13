@@ -19,7 +19,7 @@ class Program
             Console.WriteLine("4. Modifier un client");
             Console.WriteLine("5. Supprimer un client");
             Console.WriteLine("0. Quitter");
-            Console.Write("Sélectionnez une option: ");
+            Console.Write("Sélectionnez une option : ");
 
             // Valider que l'entrée est un entier
             if (!int.TryParse(Console.ReadLine(), out int option))
