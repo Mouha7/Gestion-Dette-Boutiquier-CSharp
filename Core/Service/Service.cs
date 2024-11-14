@@ -2,7 +2,7 @@ using System.Data;
 using MySql.Data.MySqlClient;
 using Dapper;
 
-namespace gestion_dette_web.services
+namespace gestion_dette_web.core.service
 {
     public class Service<T> : IService<T>
     {

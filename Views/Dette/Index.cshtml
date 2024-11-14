@@ -1,0 +1,93 @@
+@using static gestion_dette_web.Controllers.DetteController
+@using gestion_dette_web.ViewModels
+@{
+    ViewData["Title"] = "Listes Dettes";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1>Liste des Clients</h1>
+        <a href="@Url.Action("Create")" class="btn btn-primary mb-3">Ajouter un dette</a>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Surnom</th>
+                <th>Téléphone</th>
+                <th>Montant Dû</th>
+                <th>Montant Verser</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @* @if (Model.Listes != null)
+            {
+                @foreach (var dette in Model.Listes)
+                {
+                        <tr>
+                            <td>@dette.Id</td>
+                            <td>@dette.Client.Surnom</td>
+                            <td>@dette.Client.Telephone</td>
+                            <td>@dette.Montant</td>
+                            <td>@dette.MontantVerser</td>
+                            <td>
+                                <a href="@Url.Action("Details", new { id = dette.Id })" class="btn btn-info btn-sm">Détails</a>
+                                <a href="@Url.Action("Edit", new { id = dette.Id })" class="btn btn-warning btn-sm">Modifier</a>
+                                <a href="@Url.Action("Delete", new { id = dette.Id })" class="btn btn-danger btn-sm">Supprimer</a>
+                            </td>
+                        </tr>
+                }
+            } *@
+        </tbody>
+    </table>
+    <nav aria-label="Page navigation" class="float-end">
+        <ul class="pagination">
+            @if (Model.HasPreviousPage)
+            {
+                    <li class="page-item">
+                        <a class="page-link"
+                            href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), new { page = Model.PageIndex - 1 })"
+                            aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+            }
+            else
+            {
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+            }
+
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                    <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                        <a class="page-link"
+                            href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), new { page = i })">@i</a>
+                    </li>
+            }
+
+            @if (Model.HasNextPage)
+            {
+                    <li class="page-item">
+                        <a class="page-link"
+                            href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), new { page = Model.PageIndex + 1 })"
+                            aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+            }
+            else
+            {
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+            }
+        </ul>
+    </nav>
+</div>

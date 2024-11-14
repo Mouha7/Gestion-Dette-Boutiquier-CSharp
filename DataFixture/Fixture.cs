@@ -26,7 +26,7 @@ public class Fixture
                     Telephone = "771234567",
                     Adresse = "123 Rue des Bleus",
                     Dettes = [
-                    new Dette { Montant = 1000, Date = DateOnly.FromDateTime(DateTime.Now.AddDays(-3))},
+                    new Dette { Montant = 1000, Date = DateOnly.FromDateTime(DateTime.Now.AddDays(-3)), MontantVerser = 1500},
                     new Dette { Montant = 2000, Date =  DateOnly.FromDateTime(DateTime.Now.AddDays(-8)), MontantVerser = 1500 , Paiements = [
                         new Paiement { Date = DateOnly.FromDateTime(DateTime.Now.AddDays(-2)), Montant = 500 },
                         new Paiement { Date = DateOnly.FromDateTime(DateTime.Now.AddDays(-5)), Montant = 1000 }
@@ -72,6 +72,15 @@ public class Fixture
                     ] },
                 ]
                 }
+            );
+            _dbContext.SaveChanges();
+        }
+
+        if (!_dbContext.Articles.Any()) {
+            _dbContext.Articles.AddRange(
+                new Article { Libelle = "Article 1", Prix = 100 },
+                new Article { Libelle = "Article 2", Prix = 200 },
+                new Article { Libelle = "Article 3", Prix = 300 }
             );
             _dbContext.SaveChanges();
         }

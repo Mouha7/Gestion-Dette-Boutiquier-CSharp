@@ -4,6 +4,7 @@ using gestion_dette_web.services;
 using gestion_dette_web.DataFixture;
 using gestion_dette_web.Models;
 using Microsoft.AspNetCore.Identity;
+using gestion_dette_web.implement.services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +30,7 @@ builder.Services.AddIdentity<User, IdentityRole>()
 
 // Enregistrement des repositories
 builder.Services.AddScoped<IClientService, ClientService>();
+builder.Services.AddScoped<IDetteService, DetteService>();
 // Ajoutez l'enregistrement du service Fixture
 builder.Services.AddScoped<Fixture, Fixture>();
 

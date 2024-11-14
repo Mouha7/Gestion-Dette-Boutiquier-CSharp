@@ -1,8 +1,7 @@
 @using static gestion_dette_web.Controllers.ClientController
-@* @model IEnumerable<gestion_dette_web.Models.Client> *@
-@model PaginatedClientViewModel
+@using gestion_dette_web.ViewModels
 @{
-    ViewData["Title"] = "Clients";
+    ViewData["Title"] = "Listes Clients";
 }
 
 <div class="container mt-4">
@@ -22,7 +21,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var client in Model.Clients)
+            @foreach (var client in Model.Listes)
             {
                 <tr>
                     <td>@client.Id</td>

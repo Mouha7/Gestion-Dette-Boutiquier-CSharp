@@ -1,4 +1,4 @@
-namespace gestion_dette_web.services
+namespace gestion_dette_web.core.service
 {
     public interface IService<T>
     {

@@ -1,0 +1,129 @@
+@using gestion_dette_web.ViewModels
+@model DetteCreateViewModel
+@{
+    ViewData["Title"] = "Créer une Dette";
+}
+
+<div class="container mt-4">
+    <h1>Créer une Dette</h1>
+
+    <form id="detteForm" asp-action="Create" method="post">
+        <input type="hidden" asp-for="ClientId" />
+        
+        <div id="detteCards">
+            <!-- Les cartes de dette seront ajoutées ici -->
+            <div class="card mb-3 dette-card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <select class="form-select article-select" required>
+                                <option value="">Sélectionner un article</option>
+                                @foreach (var article in Model.AvailableArticles)
+                                {
+                                    <option value="@article.Id">@article.Libelle</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-5">
+                            <input type="number" class="form-control montant-input" step="0.01" min="0" placeholder="Montant" required>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-danger btn-remove-card" style="display: none;">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <button type="button" class="btn btn-success" id="addCard">
+                <i class="fas fa-plus"></i> Ajouter une ligne
+            </button>
+            <button type="submit" class="btn btn-primary">Enregistrer la dette</button>
+            <a href="@Url.Action("Index")" class="btn btn-secondary">Annuler</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            function updateRemoveButtons() {
+                const cards = $('.dette-card');
+                if (cards.length === 1) {
+                    cards.find('.btn-remove-card').hide();
+                } else {
+                    cards.find('.btn-remove-card').show();
+                }
+            }
+
+            function clearFirstCard() {
+                const firstCard = $('.dette-card').first();
+                firstCard.find('select').val('');
+                firstCard.find('input').val('');
+            }
+
+            $('#addCard').click(function() {
+                const newCard = $('.dette-card').first().clone();
+                clearFirstCard();
+                newCard.find('select').val('');
+                newCard.find('input').val('');
+                $('#detteCards').append(newCard);
+                updateRemoveButtons();
+            });
+
+            $(document).on('click', '.btn-remove-card', function() {
+                if ($('.dette-card').length > 1) {
+                    $(this).closest('.dette-card').remove();
+                    updateRemoveButtons();
+                } else {
+                    clearFirstCard();
+                }
+            });
+
+            $('#detteForm').submit(function(e) {
+                e.preventDefault();
+                const detteDetails = [];
+
+                $('.dette-card').each(function() {
+                    const articleId = $(this).find('.article-select').val();
+                    const montant = $(this).find('.montant-input').val();
+                    
+                    if (articleId && montant) {
+                        detteDetails.push({
+                            articleId: parseInt(articleId),
+                            montant: parseFloat(montant)
+                        });
+                    }
+                });
+
+                if (detteDetails.length === 0) {
+                    alert('Veuillez ajouter au moins une ligne de dette.');
+                    return;
+                }
+
+                $.ajax({
+                    url: '@Url.Action("Create", "Dette")',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        clientId: $('#ClientId').val(),
+                        details: detteDetails
+                    }),
+                    success: function(response) {
+                        if (response.success) {
+                            window.location.href = '@Url.Action("Index", "Dette")';
+                        } else {
+                            alert('Erreur lors de la création de la dette: ' + response.message);
+                        }
+                    },
+                    error: function() {
+                        alert('Une erreur est survenue lors de la création de la dette.');
+                    }
+                });
+            });
+        });
+    </script>
+}

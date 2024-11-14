@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using gestion_dette_web.Data;
 
-namespace gestion_dette_web.services
+namespace gestion_dette_web.core.service
 {
     public class ServiceEF<T> : IService<T> where T : class
     {

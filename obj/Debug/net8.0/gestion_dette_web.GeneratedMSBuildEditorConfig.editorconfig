@@ -38,6 +38,26 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2xpZW50L0luZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/macbook/Desktop/C\#/gestion_dette_web/Views/Dette/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGV0dGUvQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/macbook/Desktop/C\#/gestion_dette_web/Views/Dette/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGV0dGUvRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/macbook/Desktop/C\#/gestion_dette_web/Views/Dette/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGV0dGUvRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/macbook/Desktop/C\#/gestion_dette_web/Views/Dette/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGV0dGUvRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/macbook/Desktop/C\#/gestion_dette_web/Views/Dette/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGV0dGUvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/macbook/Desktop/C\#/gestion_dette_web/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

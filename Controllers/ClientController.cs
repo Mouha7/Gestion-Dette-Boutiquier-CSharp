@@ -1,5 +1,6 @@
 using gestion_dette_web.Models;
 using gestion_dette_web.services;
+using gestion_dette_web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace gestion_dette_web.Controllers
@@ -15,26 +16,17 @@ namespace gestion_dette_web.Controllers
             _clientService = clientService;
         }
 
-        public record PaginatedClientViewModel
-        {
-            public required List<Client> Clients { get; init; }
-            public int PageIndex { get; init; }
-            public int TotalPages { get; init; }
-            public bool HasPreviousPage { get; init; }
-            public bool HasNextPage { get; init; }
-        }
-
         // Index - Affiche tous les clients
         public IActionResult Index(int page = 1)
         {
-            const int pageSize = 10;
+            const int pageSize = 2;
             var clients = _clientService.GetClients(page, pageSize);
             var totalClients = _clientService.GetTotalClients();
             var totalPages = (int)Math.Ceiling((decimal)totalClients / pageSize);
 
-            var model = new PaginatedClientViewModel
+            var model = new PaginatedViewModel<Client>
             {
-                Clients = clients,
+                Listes = clients,
                 PageIndex = page,
                 TotalPages = totalPages,
                 HasPreviousPage = page > 1,

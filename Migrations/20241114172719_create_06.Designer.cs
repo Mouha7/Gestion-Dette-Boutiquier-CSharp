@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using gestion_dette_web.Data;
 
@@ -11,9 +12,11 @@ using gestion_dette_web.Data;
 namespace gestion_dette_web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241114172719_create_06")]
+    partial class create_06
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,9 +88,6 @@ namespace gestion_dette_web.Migrations
 
                     b.Property<int>("ArticleId")
                         .HasColumnType("int");
-
-                    b.Property<float>("Montant")
-                        .HasColumnType("float");
 
                     b.Property<int>("Qte")
                         .HasColumnType("int");

@@ -16,4 +16,6 @@ public class Dette
   public Client Client { get; set; }
   public int ClientId { get; set; }
   public virtual ICollection<Paiement>? Paiements { get; set; }
+  // Association many-to-many avec Article via Detail
+  public virtual ICollection<Detail>? Details { get; set; }
 }
