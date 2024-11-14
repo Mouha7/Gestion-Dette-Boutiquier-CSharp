@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using gestion_dette_web.Data;
 using gestion_dette_web.services;
+using gestion_dette_web.DataFixture;
+using gestion_dette_web.Models;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,9 +12,16 @@ builder.Services.AddControllersWithViews();
 
 // Configuration de la base de données
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseMySql(connectionString,
-        ServerVersion.AutoDetect(connectionString)));
+                    options.UseMySql(connectionString,
+                    ServerVersion.AutoDetect(connectionString)))
+                ;
+
+// Register the UserManager service
+builder.Services.AddIdentity<User, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
 
 // Récupération de l'instance du service Fixture
 // var fixture = builder.Services.BuildServiceProvider().GetRequiredService<Fixture>();
@@ -41,5 +51,12 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    var seeder = scope.ServiceProvider.GetRequiredService<Fixture>();
+    seeder.Load();
+}
 
 app.Run();

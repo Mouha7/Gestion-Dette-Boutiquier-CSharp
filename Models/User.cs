@@ -1,10 +1,11 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace gestion_dette_web.Models;
 
-public class User
+public class User : IdentityUser<string>
 {
-    public int Id { get; set; }
+    public new int Id { get; set; }
     [Required(ErrorMessage = "Le nom est obligatoire")]
     [StringLength(20, MinimumLength = 5, ErrorMessage = "Le nom doit avoir au moins 5 caractères et inférieur à 20 caractères")]
     public string? Nom { get; set; }

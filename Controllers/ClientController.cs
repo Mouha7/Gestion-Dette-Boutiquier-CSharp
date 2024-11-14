@@ -15,11 +15,33 @@ namespace gestion_dette_web.Controllers
             _clientService = clientService;
         }
 
-        // Index - Affiche tous les clients
-        public IActionResult Index()
+        public record PaginatedClientViewModel
         {
-            var clients = _clientService.GetAll();
-            return View(clients);
+            public required List<Client> Clients { get; init; }
+            public int PageIndex { get; init; }
+            public int TotalPages { get; init; }
+            public bool HasPreviousPage { get; init; }
+            public bool HasNextPage { get; init; }
+        }
+
+        // Index - Affiche tous les clients
+        public IActionResult Index(int page = 1)
+        {
+            const int pageSize = 10;
+            var clients = _clientService.GetClients(page, pageSize);
+            var totalClients = _clientService.GetTotalClients();
+            var totalPages = (int)Math.Ceiling((decimal)totalClients / pageSize);
+
+            var model = new PaginatedClientViewModel
+            {
+                Clients = clients,
+                PageIndex = page,
+                TotalPages = totalPages,
+                HasPreviousPage = page > 1,
+                HasNextPage = page < totalPages
+            };
+
+            return View(model);
         }
 
         // Details - Affiche les détails d'un client spécifique
